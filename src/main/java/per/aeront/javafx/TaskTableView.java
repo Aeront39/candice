@@ -141,6 +141,8 @@ public class TaskTableView implements Initializable{
       //Get highlighted task
       Task chosenTask = (Task) taskTableSelectionModel.getSelectedItems().get(0);
       
+      //TODO: Figure out why deleted tasks aren't actually deleted
+      
       displayTasks.removeTask(chosenTask.getTaskName());
       taskData.remove(chosenTask);
     }
