@@ -41,9 +41,10 @@ public class TaskTableView implements Initializable{
   
     private TaskList displayTasks = new TaskList();
 
-    //buttons for adding new tasks and exiting
+    //buttons at bottom
     @FXML private Button newTaskButton;
     @FXML private Button quitTableViewButton;
+    @FXML private Button deleteTaskButton;
     
     //table to display tasks
     @FXML private TableView<Task> taskTable;
@@ -73,7 +74,13 @@ public class TaskTableView implements Initializable{
     //When a user clicks a row, opens up that task's info in the lower screen
     @FXML private void openTaskInfo()
     {
+      //Make delete task button visible
+      deleteTaskButton.setVisible(true);
+      
+      //inTask is the currently selected task from the table
       Task inTask = (Task) taskTableSelectionModel.getSelectedItems().get(0);
+      
+      //Set data using chosen task
       taskNameLabel.setText(inTask.getTaskName());
       taskDifficultyLabel.setText(Integer.toString((inTask.getDifficulty())));
       taskDueDateLabel.setText(inTask.getDueDate().toString());
@@ -128,25 +135,32 @@ public class TaskTableView implements Initializable{
         App.setRoot("taskTableAdd");
     }
     
+    //Delete the currently selected Task
+    @FXML private void deleteChosenTask()
+    {
+      //Get highlighted task
+      Task chosenTask = (Task) taskTableSelectionModel.getSelectedItems().get(0);
+      
+      displayTasks.removeTask(chosenTask.getTaskName());
+      taskData.remove(chosenTask);
+    }
+    
     //Initialize table data
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
       //set up columns in the table
-      //TODO: Expand to new task values!
       colTaskName.setCellValueFactory(
-                new PropertyValueFactory<Task, String>("taskName"));
+                new PropertyValueFactory<>("taskName"));
       colTaskDue.setCellValueFactory(
-                new PropertyValueFactory<Task, LocalDate>("dueDate"));
+                new PropertyValueFactory<>("dueDate"));
       colTaskDiff.setCellValueFactory(
-                new PropertyValueFactory<Task, Integer>("difficulty"));
+                new PropertyValueFactory<>("difficulty"));
       
       //Read in tasks from file, saved as a TaskList displayTasks.
-      
       try
       {
         displayTasks.makeFromCSV(CSVFILENAME);
-        //displayTasks = reader.readCSVInput(CSVFileName);
       }
       catch (IOException error)
       {
@@ -155,6 +169,9 @@ public class TaskTableView implements Initializable{
         System.out.println(System.getProperty("user.dir"));
 
       }
+      
+      //Make delete button invisible until chosen
+      deleteTaskButton.setVisible(false);
       
       //Write all tasks into table
       taskData = getAllTasks(displayTasks);

@@ -27,6 +27,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import static per.aeront.javafx.Constants.*;
+
 /*
 *This controls the main TaskView page. It imports the tasks from the database
 *at initialization, allows new tasks to be added, and old tasks deleted, and
@@ -36,8 +38,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class TaskTableAdd implements Initializable{
   
     private TaskList displayTasks = new TaskList();
-    
-    String CSVFileName = "data/testTasks2.csv";
   
     @FXML private TextField taskName;
     @FXML private DatePicker taskDate;
@@ -98,7 +98,7 @@ public class TaskTableAdd implements Initializable{
     private void goToView() throws Exception {
       
         //Save task list before moving
-        displayTasks.saveAsCSV(CSVFileName);
+        displayTasks.saveAsCSV(Constants.CSVFILENAME);
       
         //Return to title page
         App.setRoot("taskTableView");
@@ -120,13 +120,13 @@ public class TaskTableAdd implements Initializable{
       
       try
       {
-        displayTasks.makeFromCSV(CSVFileName);
+        displayTasks.makeFromCSV(Constants.CSVFILENAME);
         //displayTasks = reader.readCSVInput(CSVFileName);
       }
       catch (IOException error)
       {
         System.out.print("Error reading in tasks: cannot read ");
-        System.out.println(CSVFileName);
+        System.out.println(Constants.CSVFILENAME);
         System.out.println(System.getProperty("user.dir"));
 
       }

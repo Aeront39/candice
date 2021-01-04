@@ -75,7 +75,10 @@ public class TaskList {
 	//Removes a given task from the TaskList.
 	public void removeTask(String delTaskName)
 	{
-		this.tasks.remove(delTaskName);
+      this.tasks.remove(delTaskName);
+      System.out.print("Successfuly removed task ");
+      System.out.println(delTaskName);
+		
 	}
     public Collection<Task> getAllTasks()
     {

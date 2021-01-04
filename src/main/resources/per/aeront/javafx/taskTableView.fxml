@@ -82,13 +82,10 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="265.0" spacing="30.0">
+                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="516.0" spacing="30.0">
                      <children>
                         <Button fx:id="newTaskButton" mnemonicParsing="false" onAction="#goToTaskTableAdd" prefHeight="25.0" prefWidth="163.0" text="Add Task" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                     <children>
+                        <Button fx:id="deleteTaskButton" mnemonicParsing="false" onAction="#deleteChosenTask" prefHeight="25.0" prefWidth="163.0" text="Remove Task" />
                         <Button fx:id="quitTableViewButton" onAction="#goToWelcome" prefHeight="25.0" prefWidth="139.0" text="Exit" />
                      </children>
                   </HBox>
