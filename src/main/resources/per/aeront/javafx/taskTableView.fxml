@@ -30,6 +30,7 @@
           <TableColumn fx:id="colTaskName" prefWidth="75.0" text="Task Name" />
             <TableColumn fx:id="colTaskDiff" prefWidth="75.0" text="Difficulty" />
             <TableColumn fx:id="colTaskDue" prefWidth="75.0" text="Due Date" />
+            <TableColumn fx:id="colDaysTilDue" prefWidth="75.0" text="Days Until Due" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -2,8 +2,12 @@ package per.aeront.tasks;
 import java.time.LocalDate;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.IntegerPropertyBase;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /*
@@ -141,7 +145,34 @@ public class Task {
 	{
       return Duration.between(LocalDate.now(), this.dueDate);
 	}
+    
+    //Checks just the days between two dates
+    public Period daysToDue()
+    {
+      return Period.between(LocalDate.now(), this.dueDate);
+    }
 	
+    //Gives days until due as a property
+    public SimpleStringProperty daysTilDueProperty()
+    {
+      //Get number of days until due as an int and concat (as long as non-negative)
+      int daysTilDue = this.daysToDue().getDays();
+      
+      //Case for 1 or more days until due
+      if(daysTilDue > 0)
+      {
+        return new SimpleStringProperty(Integer.toString(daysTilDue).concat(" Days"));
+      }
+      else if(daysTilDue == 0)
+      {
+        return new SimpleStringProperty("Due Today!");
+      }
+      else
+      {
+        return new SimpleStringProperty("Past due!");
+      }
+    }
+    
     //Checks whether this task is past due. A wrapper for timeToDue, where
     //TRUE is returned if task is past Due and FALSE otherwise.
     public boolean pastDue()

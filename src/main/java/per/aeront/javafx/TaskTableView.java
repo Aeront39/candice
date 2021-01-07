@@ -56,6 +56,7 @@ public class TaskTableView implements Initializable{
     @FXML private TableColumn<Task, String> colTaskName;
     @FXML private TableColumn<Task, Integer> colTaskDiff;
     @FXML private TableColumn<Task, LocalDate> colTaskDue;
+    @FXML private TableColumn<Task, String> colDaysTilDue;
     
     //labels for displaying task data
     @FXML private Label taskNameLabel;
@@ -89,49 +90,40 @@ public class TaskTableView implements Initializable{
       //Check optional variables before updating
       String dueTime = inTask.getDueTime().toString();
       if (dueTime.equals(Constants.DEFAULT_TIME))
-      {
-        dueTime = Constants.DEFAULT_TASK_VAR_STRING;
-      }
+      {dueTime = Constants.DEFAULT_TASK_VAR_STRING;}
       taskDueTimeLabel.setText(dueTime);
       
       String estDur;
       if (inTask.getEstimatedDuration() == Constants.DEFAULT_INT)
-      {
-        estDur = Constants.DEFAULT_TASK_VAR_STRING;
-      }
+      {estDur = Constants.DEFAULT_TASK_VAR_STRING;}
       else
-      {
-        estDur = Integer.toString(inTask.getEstimatedDuration());
-      }
+      {estDur = Integer.toString(inTask.getEstimatedDuration());}
       taskEstDurLabel.setText(estDur);
       
       String perSit;
       if (inTask.getTimePerSitting() == Constants.DEFAULT_INT)
-      {
-        perSit = Constants.DEFAULT_TASK_VAR_STRING;
-      }
+      {perSit = Constants.DEFAULT_TASK_VAR_STRING;}
       else
-      {
-        perSit = Integer.toString(inTask.getTimePerSitting());
-      }
-      taskEstDurLabel.setText(perSit);
-      
-      
+      {perSit = Integer.toString(inTask.getTimePerSitting());}
+      taskTimeSitLabel.setText(perSit);
     }
     
     //Navigate to welcome screen
     @FXML
-    private void goToWelcome() throws IOException 
+    private void goToWelcome() throws Exception 
     {
       //Return to title page
+      displayTasks.saveAsCSV(Constants.CSVFILENAME);
       App.setRoot("welcomePage");
     }
     
     
     //Navigate to TaskTableAdd
     @FXML
-    private void goToTaskTableAdd() throws IOException{
+    private void goToTaskTableAdd() throws Exception
+    {
         //Return to title page
+        displayTasks.saveAsCSV(Constants.CSVFILENAME);
         App.setRoot("taskTableAdd");
     }
     
@@ -158,6 +150,8 @@ public class TaskTableView implements Initializable{
                 new PropertyValueFactory<>("dueDate"));
       colTaskDiff.setCellValueFactory(
                 new PropertyValueFactory<>("difficulty"));
+      colDaysTilDue.setCellValueFactory(
+                new PropertyValueFactory<>("daysTilDue"));
       
       //Read in tasks from file, saved as a TaskList displayTasks.
       try
