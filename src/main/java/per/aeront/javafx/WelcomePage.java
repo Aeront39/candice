@@ -1,36 +1,32 @@
 package per.aeront.javafx;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class WelcomePage {
 
-    @FXML
-    //button for exiting program
-    private Button closeApplicationButton;
+    //buttons
+    @FXML private Button closeApplicationButton;
+    @FXML private Button goToWeeklyScheduleButton;
+    @FXML private Button goToTableViewButton;
     
-    @FXML
-    //button for exiting program
-    private Button goToTableViewButton;
-    
-    @FXML
-    //Method for the exitAppButton
-    private void closeApplication()
+    //Navigation buttons
+    @FXML private void closeApplication()
     {
       Stage stage = (Stage) closeApplicationButton.getScene().getWindow();
       stage.close();
     }
   
-    @FXML
-    private void goToTableView() throws IOException {
-        App.setRoot("taskTableView");
+    @FXML private void goToTableView() throws IOException {
+      App.setRoot("taskTableView");
+    }
+    
+    @FXML private void goToWeeklySchedule() throws IOException {
+      Stage stage = (Stage) goToWeeklyScheduleButton.getScene().getWindow();
+      stage.setWidth(800);
+      stage.setHeight(800);
+      App.setRoot("weeklySchedule");
     }
 }

@@ -18,7 +18,7 @@ public class App extends Application {
     @Override
     //Load the 'secondary' JavaFX Scene
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("welcomePage"), 640, 480);
+        scene = new Scene(loadFXML("welcomePage"), 400, 400);
         stage.setScene(scene);
         stage.show();
     }
