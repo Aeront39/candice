@@ -41,7 +41,7 @@ public class TaskList {
 	{
       this.taskListName = new SimpleStringProperty(name);
       this.description = desc;
-	  this.tasks = new HashMap<String, Task>();
+	  this.tasks = new HashMap<>();
 	}
     
     public TaskList()
